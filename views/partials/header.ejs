@@ -2,3 +2,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pokédex</title>
 <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+<style>
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .hover-bounce:hover {
+    animation: bounce 0.5s ease infinite;
+  }
+  .loading {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('form');
+    const container = document.querySelector('.container');
+    
+    if (form) {
+      form.addEventListener('submit', () => {
+        container.classList.add('loading');
+      });
+    }
+
+    // Add loading state when clicking Pokemon cards
+    document.querySelectorAll('a[href^="/pokemon/"]').forEach(link => {
+      link.addEventListener('click', () => {
+        container.classList.add('loading');
+      });
+    });
+  });
+</script>
